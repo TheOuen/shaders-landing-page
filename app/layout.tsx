@@ -8,9 +8,8 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Shaders Landing Page",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "Aquadro Studio | Architecture, Interior Design & Photography",
+  description: "Aquadro Studio - A creative studio specializing in architectural design, interior styling, and photography. We craft spaces and capture moments with intention and artistry.",
 }
 
 export default function RootLayout({
