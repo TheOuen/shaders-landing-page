@@ -9,6 +9,7 @@ const projects = [
     category: "Hospitality",
     year: "2009",
     description: "A boutique hotel exploring the boundaries between digital presence and physical space.",
+    imageUrl: "/meta/Screenshot 2025-12-24 at 17.32.46.png",
   },
   {
     id: "2",
@@ -16,6 +17,7 @@ const projects = [
     category: "Mixed Use",
     year: "2010",
     description: "Historic lantern factory transformed into a vibrant community hub and creative workspace.",
+    imageUrl: "/lanthorn-on-main/Screenshot 2025-12-24 at 17.33.24.png",
   },
   {
     id: "3",
@@ -30,6 +32,7 @@ const projects = [
     category: "Educational",
     year: "2012",
     description: "Learning environment that nurtures curiosity through light, nature, and flexible spaces.",
+    imageUrl: "/silverstream-primary/Screenshot 2025-12-24 at 17.34.08.png",
   },
   {
     id: "5",
