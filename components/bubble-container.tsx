@@ -56,23 +56,42 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
     const height = window.innerHeight
     const centerX = width / 2
     const centerY = height / 2
+    const isMobile = width < 768
 
-    // Calculate corner positions for words
-    const padding = 60
-    const corners = [
-      { x: padding + 80, y: padding + 40 }, // top-left
-      { x: width - padding - 80, y: padding + 40 }, // top-right
-      { x: padding + 80, y: height - padding - 40 }, // bottom-left
-      { x: width - padding - 80, y: height - padding - 40 }, // bottom-right
-    ]
+    // Calculate corner positions for words - adjust for mobile
+    const padding = isMobile ? 20 : 60
+    // On mobile, position items below title (title is at ~40% from top due to -mt-24 offset)
+    const mobileStartY = height * 0.52
+    const mobileSpacing = 50
+    const corners = isMobile
+      ? [
+          // On mobile: stack vertically below the title
+          { x: centerX, y: mobileStartY },
+          { x: centerX, y: mobileStartY + mobileSpacing },
+          { x: centerX, y: mobileStartY + mobileSpacing * 2 },
+          { x: centerX, y: mobileStartY + mobileSpacing * 3 },
+        ]
+      : [
+          { x: padding + 80, y: padding + 40 }, // top-left
+          { x: width - padding - 80, y: padding + 40 }, // top-right
+          { x: padding + 80, y: height - padding - 40 }, // bottom-left
+          { x: width - padding - 80, y: height - padding - 40 }, // bottom-right
+        ]
 
     // Position words around the bubble initially
-    const wordPositions = [
-      { x: centerX - 100, y: centerY - 60 }, // top-left of center
-      { x: centerX + 100, y: centerY - 60 }, // top-right of center
-      { x: centerX - 100, y: centerY + 60 }, // bottom-left of center
-      { x: centerX + 100, y: centerY + 60 }, // bottom-right of center
-    ]
+    const wordPositions = isMobile
+      ? [
+          { x: centerX, y: centerY },
+          { x: centerX, y: centerY },
+          { x: centerX, y: centerY },
+          { x: centerX, y: centerY },
+        ]
+      : [
+          { x: centerX - 100, y: centerY - 60 }, // top-left of center
+          { x: centerX + 100, y: centerY - 60 }, // top-right of center
+          { x: centerX - 100, y: centerY + 60 }, // bottom-left of center
+          { x: centerX + 100, y: centerY + 60 }, // bottom-right of center
+        ]
 
     // If skipping intro, go directly to final state
     if (skipIntro) {
@@ -350,7 +369,9 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
               onClick={() => handleWordClick(word)}
               onMouseEnter={() => setHoveredWord(word.label)}
               onMouseLeave={() => setHoveredWord(null)}
-              className="absolute pointer-events-auto cursor-pointer transition-all duration-500"
+              onTouchStart={() => setHoveredWord(word.label)}
+              onTouchEnd={() => setTimeout(() => setHoveredWord(null), 150)}
+              className="absolute pointer-events-auto cursor-pointer transition-all duration-500 px-4 py-3 -mx-4 -my-3"
               style={{
                 left: word.x,
                 top: word.y,
@@ -360,7 +381,7 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
             >
               <span
                 className={`
-                  font-sans text-sm md:text-base tracking-[0.25em] uppercase
+                  font-sans text-base md:text-base tracking-[0.25em] uppercase
                   transition-all duration-300
                   ${hoveredWord === word.label
                     ? "text-foreground/90"
@@ -378,7 +399,7 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
               {/* Underline on hover */}
               <div
                 className={`
-                  absolute left-0 right-0 -bottom-1 h-px bg-foreground/30
+                  absolute left-4 right-4 -bottom-1 h-px bg-foreground/30
                   transition-all duration-300 origin-center
                   ${hoveredWord === word.label ? "scale-x-100" : "scale-x-0"}
                 `}

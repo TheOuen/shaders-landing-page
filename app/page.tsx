@@ -55,33 +55,36 @@ export default function Home() {
 
       {/* Central branding - AQUADRO / STUDIO */}
       <div
-        className={`fixed inset-0 z-20 flex flex-col items-center justify-center pointer-events-none transition-all duration-[1500ms] ease-out ${
+        className={`fixed inset-0 z-20 flex flex-col items-center pointer-events-none transition-all duration-[1500ms] ease-out ${
           showTitle ? "opacity-100" : "opacity-0"
         }`}
       >
-        <h1
-          className={`font-sans text-6xl md:text-8xl lg:text-9xl font-extralight tracking-[0.2em] text-foreground/90 select-none uppercase transition-all duration-[1500ms] ease-out ${
-            showTitle ? "translate-y-0" : "translate-y-4"
-          }`}
-        >
-          Aquadro
-        </h1>
-        <p
-          className={`mt-2 md:mt-4 font-sans text-2xl md:text-3xl lg:text-4xl font-extralight tracking-[0.5em] text-foreground/60 uppercase transition-all duration-[1500ms] ease-out ${
-            showTitle ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: showTitle ? "200ms" : "0ms" }}
-        >
-          Studio
-        </p>
-        <p
-          className={`mt-6 font-sans text-xs tracking-[0.4em] text-foreground/40 uppercase transition-all duration-[1500ms] ease-out ${
-            showTitle ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: showTitle ? "400ms" : "0ms" }}
-        >
-          Design & Photography
-        </p>
+        {/* Position title in top portion on mobile, centered on desktop */}
+        <div className="flex flex-col items-center mt-[30vh] md:mt-0 md:justify-center md:h-full">
+          <h1
+            className={`font-sans text-5xl md:text-8xl lg:text-9xl font-extralight tracking-[0.15em] md:tracking-[0.2em] text-foreground/90 select-none uppercase transition-all duration-[1500ms] ease-out ${
+              showTitle ? "translate-y-0" : "translate-y-4"
+            }`}
+          >
+            Aquadro
+          </h1>
+          <p
+            className={`mt-1 md:mt-4 font-sans text-xl md:text-3xl lg:text-4xl font-extralight tracking-[0.4em] md:tracking-[0.5em] text-foreground/60 uppercase transition-all duration-[1500ms] ease-out ${
+              showTitle ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+            style={{ transitionDelay: showTitle ? "200ms" : "0ms" }}
+          >
+            Studio
+          </p>
+          <p
+            className={`mt-4 md:mt-6 font-sans text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] text-foreground/40 uppercase transition-all duration-[1500ms] ease-out hidden md:block ${
+              showTitle ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+            style={{ transitionDelay: showTitle ? "400ms" : "0ms" }}
+          >
+            Design & Photography
+          </p>
+        </div>
       </div>
 
       {/* Bubble intro and service words */}

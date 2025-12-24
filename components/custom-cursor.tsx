@@ -10,9 +10,26 @@ export function CustomCursor() {
   const targetPositionRef = useRef({ x: 0, y: 0 })
   const isPointerRef = useRef(false)
   const [gradientAngle, setGradientAngle] = useState(0)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
   const angleRef = useRef(0)
 
+  // Detect touch device
   useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches
+      )
+    }
+    checkTouch()
+    window.addEventListener('resize', checkTouch)
+    return () => window.removeEventListener('resize', checkTouch)
+  }, [])
+
+  useEffect(() => {
+    if (isTouchDevice) return
+
     let animationFrameId: number
 
     const lerp = (start: number, end: number, factor: number) => {
@@ -66,7 +83,10 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", handleMouseMove)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [isTouchDevice])
+
+  // Don't render on touch devices
+  if (isTouchDevice) return null
 
   return (
     <>
