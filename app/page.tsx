@@ -3,6 +3,7 @@
 import { CustomCursor } from "@/components/custom-cursor"
 import { GrainOverlay } from "@/components/grain-overlay"
 import { BubbleContainer } from "@/components/bubble-container"
+import { CursorRevealBackground } from "@/components/cursor-reveal-background"
 import { useCallback, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
@@ -48,6 +49,7 @@ export default function Home() {
       className="relative h-screen w-full overflow-hidden"
       style={{ backgroundColor: "#e7e5e0" }}
     >
+      <CursorRevealBackground />
       <CustomCursor />
       <GrainOverlay />
 
