@@ -371,12 +371,13 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
               onMouseLeave={() => setHoveredWord(null)}
               onTouchStart={() => setHoveredWord(word.label)}
               onTouchEnd={() => setTimeout(() => setHoveredWord(null), 150)}
-              className="absolute pointer-events-auto cursor-pointer transition-all duration-500 px-4 py-3 -mx-4 -my-3"
+              className="absolute pointer-events-auto cursor-pointer transition-all duration-500"
               style={{
                 left: word.x,
                 top: word.y,
                 transform: `translate(-50%, -50%) scale(${word.scale})`,
                 opacity: word.opacity,
+                padding: '12px 16px',
               }}
             >
               <span
@@ -399,10 +400,11 @@ export function BubbleContainer({ services, onIntroComplete, skipIntro = false }
               {/* Underline on hover */}
               <div
                 className={`
-                  absolute left-4 right-4 -bottom-1 h-px bg-foreground/30
+                  absolute left-1/2 -translate-x-1/2 bottom-2 h-px bg-foreground/30
                   transition-all duration-300 origin-center
-                  ${hoveredWord === word.label ? "scale-x-100" : "scale-x-0"}
+                  ${hoveredWord === word.label ? "scale-x-100 w-full" : "scale-x-0 w-full"}
                 `}
+                style={{ maxWidth: 'calc(100% - 32px)' }}
               />
             </button>
           ))}
